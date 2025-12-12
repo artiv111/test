@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Сайт</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-globe"></i> Добро пожаловать!</h1>
+            <p class="subtitle">Простой сайт с Python-сервером</p>
+        </header>
+        
+        <main>
+            <section class="card">
+                <h2><i class="fas fa-info-circle"></i> О сайте</h2>
+                <p>Это демонстрационный сайт, работающий на Python HTTP-сервере.</p>
+                <p>Всего 3 файла: HTML, CSS и JavaScript.</p>
+            </section>
+            
+            <section class="card">
+                <h2><i class="fas fa-sliders-h"></i> Взаимодействие</h2>
+                <div class="controls">
+                    <button id="changeColorBtn" class="btn">
+                        <i class="fas fa-palette"></i> Сменить цвет
+                    </button>
+                    <button id="addItemBtn" class="btn">
+                        <i class="fas fa-plus"></i> Добавить элемент
+                    </button>
+                    <button id="resetBtn" class="btn">
+                        <i class="fas fa-redo"></i> Сбросить
+                    </button>
+                </div>
+                
+                <div class="counter">
+                    <p>Счетчик: <span id="counterValue">0</span></p>
+                    <button id="incrementBtn" class="btn small">
+                        <i class="fas fa-plus"></i> Увеличить
+                    </button>
+                </div>
+                
+                <div class="dynamic-list">
+                    <h3>Динамический список:</h3>
+                    <ul id="itemList">
+                        <li>Элемент 1</li>
+                        <li>Элемент 2</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="card">
+                <h2><i class="fas fa-cogs"></i> Технологии</h2>
+                <div class="tech-icons">
+                    <div class="tech">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="tech">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="tech">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="tech">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Сайт работает на Python HTTP-сервере</p>
+            <p>Текущее время: <span id="currentTime"></span></p>
+            <p class="server-info" id="serverInfo"></p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

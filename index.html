@@ -8,17 +8,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="theme-switcher">
+        <button id="themeToggle" class="theme-btn">
+            <i class="fas fa-moon"></i>
+            <span>Тёмная тема</span>
+        </button>
+    </div>
+    
     <div class="container">
         <header>
             <h1><i class="fas fa-globe"></i> Добро пожаловать!</h1>
             <p class="subtitle">Простой сайт с Python-сервером</p>
+            <div class="theme-status">
+                <span id="themeStatus">Светлая тема активна</span>
+            </div>
         </header>
         
         <main>
             <section class="card">
                 <h2><i class="fas fa-info-circle"></i> О сайте</h2>
                 <p>Это демонстрационный сайт, работающий на Python HTTP-сервере.</p>
-                <p>Всего 3 файла: HTML, CSS и JavaScript.</p>
+                <p>Теперь с поддержкой тёмной темы!</p>
+                <div class="theme-preview">
+                    <div class="light-preview"></div>
+                    <div class="dark-preview"></div>
+                </div>
             </section>
             
             <section class="card">
@@ -72,12 +86,41 @@
                     </div>
                 </div>
             </section>
+            
+            <section class="card">
+                <h2><i class="fas fa-adjust"></i> Настройки темы</h2>
+                <div class="theme-options">
+                    <div class="theme-option" data-theme="light">
+                        <div class="theme-sample light-sample"></div>
+                        <span>Светлая</span>
+                        <i class="fas fa-check check-icon"></i>
+                    </div>
+                    <div class="theme-option" data-theme="dark">
+                        <div class="theme-sample dark-sample"></div>
+                        <span>Тёмная</span>
+                        <i class="fas fa-check check-icon"></i>
+                    </div>
+                    <div class="theme-option" data-theme="auto">
+                        <div class="theme-sample auto-sample">
+                            <div class="half-light"></div>
+                            <div class="half-dark"></div>
+                        </div>
+                        <span>Авто</span>
+                        <i class="fas fa-check check-icon"></i>
+                    </div>
+                </div>
+                <p class="theme-hint">Авто-тема будет использовать системные настройки</p>
+            </section>
         </main>
         
         <footer>
             <p>Сайт работает на Python HTTP-сервере</p>
             <p>Текущее время: <span id="currentTime"></span></p>
             <p class="server-info" id="serverInfo"></p>
+            <div class="theme-footer">
+                <i class="fas fa-paint-brush"></i>
+                <span>Текущая тема: <span id="currentTheme">светлая</span></span>
+            </div>
         </footer>
     </div>
     

@@ -6,6 +6,7 @@
     <title>Мой Flask Сайт</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -15,6 +16,7 @@
                 <li><a href="/" class="nav-link {% if not page %}active{% endif %}">Главная</a></li>
                 <li><a href="/about" class="nav-link {% if page == 'about' %}active{% endif %}">О нас</a></li>
                 <li><a href="/contact" class="nav-link {% if page == 'contact' %}active{% endif %}">Контакты</a></li>
+                <li><a href="/factor" class="nav-link {% if page == 'factor' %}active{% endif %}">Factor ✨</a></li>
             </ul>
             <button class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -96,6 +98,95 @@
             </div>
         </section>
         {% endif %}
+
+        {% if page == 'factor' %}
+        <section class="factor-page">
+            <div class="factor-hero">
+                <div class="factor-title">
+                    <h1><span class="factor-name">Factor</span> Zone</h1>
+                    <div class="crown">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                </div>
+                <p class="factor-subtitle">Специальная страница для легендарного друга!</p>
+                
+                <div class="factor-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <span class="stat-number" id="complimentCount">0</span>
+                        <span class="stat-label">комплиментов получено</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <span class="stat-number" id="clickCount">0</span>
+                        <span class="stat-label">нажатий кнопки</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-fire"></i>
+                        <span class="stat-number" id="comboCount">0</span>
+                        <span class="stat-label">максимальное комбо</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="factor-container">
+                <div class="factor-main">
+                    <div class="factor-button-container">
+                        <button class="factor-button" id="factorButton" onclick="generateCompliment()">
+                            <div class="button-content">
+                                <i class="fas fa-gem"></i>
+                                <span>FACTOR</span>
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="button-pulse"></div>
+                        </button>
+                        <p class="button-hint">Нажми на кнопку, чтобы получить комплимент!</p>
+                    </div>
+
+                    <div class="compliments-display" id="complimentsDisplay">
+                        <!-- Здесь будут появляться комплименты -->
+                    </div>
+
+                    <div class="special-buttons">
+                        <button class="special-button" onclick="generateSpecialCompliment('rainbow')">
+                            <i class="fas fa-rainbow"></i> Радужный комплимент
+                        </button>
+                        <button class="special-button" onclick="generateSpecialCompliment('fire')">
+                            <i class="fas fa-fire"></i> Огненный комплимент
+                        </button>
+                        <button class="special-button" onclick="generateSpecialCompliment('gold')">
+                            <i class="fas fa-coins"></i> Золотой комплимент
+                        </button>
+                    </div>
+                </div>
+
+                <div class="factor-sidebar">
+                    <div class="recent-compliments">
+                        <h3><i class="fas fa-history"></i> Последние комплименты:</h3>
+                        <ul id="recentCompliments">
+                            <!-- Последние комплименты будут здесь -->
+                        </ul>
+                    </div>
+                    
+                    <div class="achievements">
+                        <h3><i class="fas fa-medal"></i> Достижения:</h3>
+                        <div class="achievement-list" id="achievementList">
+                            <!-- Достижения будут здесь -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="factor-message">
+                <h3><i class="fas fa-heart"></i> Для Factor:</h3>
+                <p class="special-message">
+                    Эта страница создана специально для тебя! Каждый раз, когда ты нажимаешь кнопку, 
+                    ты получаешь новый уникальный комплимент. Ты - потрясающий друг и заслуживаешь 
+                    только самых лучших слов! Продолжай сиять! ✨
+                </p>
+            </div>
+        </section>
+        {% endif %}
     </main>
 
     <footer class="footer">
@@ -105,6 +196,12 @@
 
     <div id="notification" class="notification"></div>
 
+    <!-- Конфетти эффект -->
+    <canvas id="confettiCanvas"></canvas>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% if page == 'factor' %}
+    <script src="{{ url_for('static', filename='js/factor.js') }}"></script>
+    {% endif %}
 </body>
 </html>

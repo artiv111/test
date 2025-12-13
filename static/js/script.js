@@ -63,25 +63,62 @@ function showNotification(message, type = 'success') {
     }, 3000);
 }
 
-// Плавная прокрутка для якорей
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId !== '#') {
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
+// Сохранение темы в localStorage
+function saveTheme(isDarkMode) {
+    localStorage.setItem('darkMode', isDarkMode);
+}
+
+// Загрузка темы из localStorage
+function loadTheme() {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        themeToggle.style.background = '#f39c12';
+    } else {
+        document.body.classList.remove('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        themeToggle.style.background = '#6a11cb';
+    }
+}
+
+// Создание кнопки переключения темы
+function createThemeToggle() {
+    const themeToggle = document.createElement('button');
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    themeToggle.className = 'theme-toggle';
+    themeToggle.id = 'themeToggle';
+    themeToggle.setAttribute('aria-label', 'Переключить тему');
+    themeToggle.setAttribute('title', 'Переключить тему');
+    
+    themeToggle.addEventListener('click', function() {
+        const isDarkMode = !document.body.classList.contains('dark-mode');
+        
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            themeToggle.style.background = '#f39c12';
+        } else {
+            document.body.classList.remove('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            themeToggle.style.background = '#6a11cb';
         }
+        
+        saveTheme(isDarkMode);
     });
-});
+    
+    return themeToggle;
+}
 
 // Анимация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
+    // Добавляем кнопку переключения темы
+    const themeToggle = createThemeToggle();
+    document.body.appendChild(themeToggle);
+    
+    // Загружаем сохраненную тему
+    loadTheme();
+    
     // Анимация для карточек
     const cards = document.querySelectorAll('.feature-card');
     cards.forEach((card, index) => {
@@ -96,66 +133,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         }, index * 200);
     });
+    
+    // Сохраняем тему при переходе между страницами
+    window.addEventListener('beforeunload', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        saveTheme(isDarkMode);
+    });
 });
-
-// Изменение темы (простой пример)
-const themeToggle = document.createElement('button');
-themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-themeToggle.className = 'theme-toggle';
-themeToggle.style.position = 'fixed';
-themeToggle.style.bottom = '20px';
-themeToggle.style.left = '20px';
-themeToggle.style.background = '#6a11cb';
-themeToggle.style.color = 'white';
-themeToggle.style.border = 'none';
-themeToggle.style.borderRadius = '50%';
-themeToggle.style.width = '50px';
-themeToggle.style.height = '50px';
-themeToggle.style.fontSize = '1.2rem';
-themeToggle.style.cursor = 'pointer';
-themeToggle.style.zIndex = '1000';
-themeToggle.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
-
-themeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        themeToggle.style.background = '#f39c12';
-    } else {
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        themeToggle.style.background = '#6a11cb';
-    }
-});
-
-// Добавляем кнопку переключения темы на страницу
-document.body.appendChild(themeToggle);
-
-// Добавляем стили для темной темы
-const darkModeStyles = `
-    body.dark-mode {
-        background-color: #1a1a1a;
-        color: #ffffff;
-    }
-    
-    body.dark-mode .hero,
-    body.dark-mode .feature-card,
-    body.dark-mode .page-content {
-        background-color: #2d2d2d;
-        color: #ffffff;
-    }
-    
-    body.dark-mode .nav-link {
-        color: #ffffff;
-    }
-    
-    body.dark-mode .form-group input,
-    body.dark-mode .form-group textarea {
-        background-color: #3d3d3d;
-        color: #ffffff;
-        border-color: #555;
-    }
-`;
-
-const styleSheet = document.createElement('style');
-styleSheet.textContent = darkModeStyles;
-document.head.appendChild(styleSheet);

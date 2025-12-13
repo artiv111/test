@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 import random
+import json
 
 app = Flask(__name__)
 
@@ -55,11 +56,28 @@ def factor():
 
 @app.route('/api/get_compliment')
 def get_compliment():
-    compliment = random.choice(COMPLIMENTS)
-    return jsonify({
-        'compliment': compliment,
-        'total': len(COMPLIMENTS)
-    })
+    try:
+        compliment = random.choice(COMPLIMENTS)
+        return jsonify({
+            'compliment': compliment,
+            'total': len(COMPLIMENTS),
+            'status': 'success'
+        })
+    except Exception as e:
+        return jsonify({
+            'compliment': 'Супер!',
+            'total': len(COMPLIMENTS),
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+# Добавляем CORS заголовки для API
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

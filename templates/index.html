@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Flask Сайт</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">FlaskSite</a>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link {% if not page %}active{% endif %}">Главная</a></li>
+                <li><a href="/about" class="nav-link {% if page == 'about' %}active{% endif %}">О нас</a></li>
+                <li><a href="/contact" class="nav-link {% if page == 'contact' %}active{% endif %}">Контакты</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% if not page %}
+        <section class="hero">
+            <h1>Добро пожаловать на Flask Сайт!</h1>
+            <p>Это простой сайт, созданный с использованием Flask, HTML, CSS и JavaScript</p>
+            <button class="cta-button" onclick="showMessage()">Нажми меня</button>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Быстро</h3>
+                <p>Flask - легкий и быстрый фреймворк</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-code"></i>
+                <h3>Просто</h3>
+                <p>Простая структура и понятный код</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-expand"></i>
+                <h3>Гибко</h3>
+                <p>Легко расширять и модифицировать</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if page == 'about' %}
+        <section class="page-content">
+            <h1>О нас</h1>
+            <p>Этот сайт создан для демонстрации возможностей Flask - микрофреймворка для веб-разработки на Python.</p>
+            <div class="about-info">
+                <h3>Используемые технологии:</h3>
+                <ul>
+                    <li>Python Flask - бэкенд</li>
+                    <li>HTML5 - разметка</li>
+                    <li>CSS3 - стилизация</li>
+                    <li>JavaScript - интерактивность</li>
+                </ul>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if page == 'contact' %}
+        <section class="page-content">
+            <h1>Контакты</h1>
+            <p>Свяжитесь с нами, если у вас есть вопросы или предложения.</p>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" placeholder="Введите ваше имя">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Введите ваш email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Сообщение:</label>
+                    <textarea id="message" rows="5" placeholder="Введите ваше сообщение"></textarea>
+                </div>
+                
+                <button type="button" class="submit-btn" onclick="submitForm()">Отправить</button>
+            </form>
+            
+            <div class="contact-info">
+                <h3>Наши контакты:</h3>
+                <p><i class="fas fa-envelope"></i> email@example.com</p>
+                <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Мой Flask Сайт. Все права защищены.</p>
+        <p>Создано с <i class="fas fa-heart"></i> и Flask</p>
+    </footer>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

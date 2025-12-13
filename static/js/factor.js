@@ -1,4 +1,4 @@
-// Factor Page JavaScript - Исправленная версия
+// Factor Page JavaScript - Исправленная версия без двойных кликов
 let clickCount = 0;
 let complimentCount = 0;
 let comboCount = 0;
@@ -35,10 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
     complimentCount = savedCompliments.length;
     updateStats();
     
-    // Назначаем обработчик на кнопку
+    // Назначаем обработчик на кнопку - только здесь, не в HTML
     const factorButton = document.getElementById('factorButton');
     if (factorButton) {
-        factorButton.addEventListener('click', generateCompliment);
+        // Используем { once: false } чтобы можно было кликать много раз
+        factorButton.addEventListener('click', handleFactorButtonClick, false);
         console.log('Factor button event listener added');
     }
     
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(event) {
         if (event.code === 'Space' && window.location.pathname === '/factor') {
             event.preventDefault();
-            generateCompliment();
+            handleFactorButtonClick();
         }
     });
     
@@ -62,6 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 1000);
 });
+
+// Новая функция-обработчик для кнопки
+async function handleFactorButtonClick(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation(); // Останавливаем всплытие события
+    }
+    
+    console.log('Factor button clicked - single handler');
+    await generateCompliment();
+}
 
 // Загрузка статистики из localStorage
 function loadFactorStats() {
@@ -201,6 +213,20 @@ function updateStats() {
 async function generateCompliment() {
     console.log('Generate compliment called');
     
+    // Защита от слишком частых кликов (анти-спам)
+    const now = Date.now();
+    const button = document.getElementById('factorButton');
+    if (button.classList.contains('disabled')) {
+        console.log('Button is disabled, ignoring click');
+        return;
+    }
+    
+    // Временно отключаем кнопку на 300мс
+    button.classList.add('disabled');
+    setTimeout(() => {
+        button.classList.remove('disabled');
+    }, 300);
+    
     try {
         const response = await fetch('/api/get_compliment');
         if (!response.ok) throw new Error('Network response was not ok');
@@ -211,7 +237,6 @@ async function generateCompliment() {
         complimentCount++;
         
         // Проверка комбо
-        const now = Date.now();
         if (now - lastClickTime < COMBO_TIMEOUT) {
             currentCombo++;
             if (currentCombo > comboCount) {
@@ -262,6 +287,14 @@ async function generateCompliment() {
 // Генерация специального комплимента
 function generateSpecialCompliment(type) {
     console.log('Generate special compliment:', type);
+    
+    // Защита от слишком частых кликов
+    const now = Date.now();
+    if (now - lastClickTime < 300) {
+        console.log('Too fast click, ignoring');
+        return;
+    }
+    lastClickTime = now;
     
     const specialCompliments = {
         rainbow: ["🌈 Радужная звезда!", "✨ Сияешь всеми цветами!", "🎨 Живописный гений!", "💫 Мультицветное чудо!"],

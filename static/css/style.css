@@ -1634,4 +1634,45 @@ body.dark-mode .achievement-item {
 body.dark-mode .factor-message {
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(106, 17, 203, 0.1));
     border-color: rgba(106, 17, 203, 0.3);
+/* ====== ЗАЩИТА ОТ ДВОЙНЫХ КЛИКОВ ====== */
+
+/* Защита от двойных кликов */
+.factor-button.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: scale(0.98) !important;
+}
+
+.factor-button.disabled .button-pulse {
+    animation: none;
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* Улучшение анимации кнопки */
+.factor-button {
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Убираем outline при фокусе для кнопки Factor */
+.factor-button:focus {
+    outline: none;
+}
+
+/* Анимация нажатия */
+@keyframes buttonPress {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.factor-button:active {
+    animation: buttonPress 0.2s;
+}
+
+/* Анимация для специальных кнопок при отключении */
+.special-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
 }

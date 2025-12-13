@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Flask Сайт</title>
+    <title>Artiv Labs - Креативные решения</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
 </head>
 <body>
+    <!-- Бейдж создателя -->
+    <div class="creator-badge">
+        <i class="fas fa-code"></i>
+        Created by <strong>artiv</strong>
+    </div>
+
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">FlaskSite</a>
+            <a href="/" class="logo">
+                <i class="fas fa-rocket logo-icon"></i>
+                Artiv<span style="color: var(--accent-color);">Labs</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="/" class="nav-link {% if not page %}active{% endif %}">Главная</a></li>
-                <li><a href="/about" class="nav-link {% if page == 'about' %}active{% endif %}">О нас</a></li>
-                <li><a href="/contact" class="nav-link {% if page == 'contact' %}active{% endif %}">Контакты</a></li>
-                <li><a href="/factor" class="nav-link {% if page == 'factor' %}active{% endif %}">Factor ✨</a></li>
+                <li><a href="/" class="nav-link {% if not page %}active{% endif %}">
+                    <i class="fas fa-home"></i> Главная
+                </a></li>
+                <li><a href="/about" class="nav-link {% if page == 'about' %}active{% endif %}">
+                    <i class="fas fa-info-circle"></i> О нас
+                </a></li>
+                <li><a href="/contact" class="nav-link {% if page == 'contact' %}active{% endif %}">
+                    <i class="fas fa-envelope"></i> Контакты
+                </a></li>
+                <li><a href="/factor" class="nav-link {% if page == 'factor' %}active{% endif %}">
+                    <i class="fas fa-star"></i> Factor ✨
+                </a></li>
             </ul>
             <button class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -27,74 +45,98 @@
     <main class="main-content">
         {% if not page %}
         <section class="hero">
-            <h1>Добро пожаловать на Flask Сайт!</h1>
-            <p>Это простой сайт, созданный с использованием Flask, HTML, CSS и JavaScript</p>
-            <button class="cta-button" onclick="showMessage()">Нажми меня</button>
+            <h1>Добро пожаловать в Artiv Labs!</h1>
+            <p>Креативные веб-решения от <span style="color: var(--creator-color); font-weight: bold;">artiv</span>. Инновации, технологии и стиль в каждом проекте.</p>
+            <button class="cta-button" onclick="showMessage()">
+                <i class="fas fa-magic"></i> Начать магию
+            </button>
         </section>
 
         <section class="features">
             <div class="feature-card">
                 <i class="fas fa-bolt"></i>
-                <h3>Быстро</h3>
-                <p>Flask - легкий и быстрый фреймворк</p>
+                <h3>Скорость</h3>
+                <p>Оптимизированные решения для мгновенной загрузки</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-code"></i>
-                <h3>Просто</h3>
-                <p>Простая структура и понятный код</p>
+                <i class="fas fa-palette"></i>
+                <h3>Дизайн</h3>
+                <p>Современный и интуитивный интерфейс</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-expand"></i>
-                <h3>Гибко</h3>
-                <p>Легко расширять и модифицировать</p>
+                <i class="fas fa-code-branch"></i>
+                <h3>Технологии</h3>
+                <p>Используем самые передовые технологии веб-разработки</p>
             </div>
         </section>
+        
+        <div class="page-content">
+            <h2>О Artiv Labs</h2>
+            <p>Artiv Labs - это креативная лаборатория, созданная <strong>artiv</strong>, где рождаются инновационные веб-решения. Мы сочетаем техническое мастерство с художественным видением.</p>
+            <p>Каждый проект - это не просто код, а произведение искусства, созданное с душой и вниманием к деталям.</p>
+        </div>
         {% endif %}
 
         {% if page == 'about' %}
         <section class="page-content">
-            <h1>О нас</h1>
-            <p>Этот сайт создан для демонстрации возможностей Flask - микрофреймворка для веб-разработки на Python.</p>
+            <h1>О Artiv Labs</h1>
+            <p>Artiv Labs - это больше, чем просто веб-студия. Это пространство для творчества и инноваций, созданное <strong>artiv</strong> для реализации самых смелых идей.</p>
+            
             <div class="about-info">
-                <h3>Используемые технологии:</h3>
+                <h3>Наша философия:</h3>
                 <ul>
-                    <li>Python Flask - бэкенд</li>
-                    <li>HTML5 - разметка</li>
-                    <li>CSS3 - стилизация</li>
-                    <li>JavaScript - интерактивность</li>
+                    <li><strong>Креативность</strong> - каждый проект уникален</li>
+                    <li><strong>Качество</strong> - внимание к каждой детали</li>
+                    <li><strong>Инновации</strong> - использование передовых технологий</li>
+                    <li><strong>Доступность</strong> - понятные решения для всех</li>
                 </ul>
             </div>
+            
+            <div class="about-info">
+                <h3>Технологический стек:</h3>
+                <ul>
+                    <li><strong>Python Flask</strong> - мощный и гибкий бэкенд</li>
+                    <li><strong>HTML5 & CSS3</strong> - современная верстка</li>
+                    <li><strong>JavaScript ES6+</strong> - динамичные интерфейсы</li>
+                    <li><strong>Responsive Design</strong> - адаптация под все устройства</li>
+                </ul>
+            </div>
+            
+            <p>Создатель <strong>artiv</strong> верит, что код может быть не только функциональным, но и красивым, а интерфейсы - не только удобными, но и вдохновляющими.</p>
         </section>
         {% endif %}
 
         {% if page == 'contact' %}
         <section class="page-content">
-            <h1>Контакты</h1>
-            <p>Свяжитесь с нами, если у вас есть вопросы или предложения.</p>
+            <h1>Свяжитесь с нами</h1>
+            <p>Есть вопросы или идеи? Artiv всегда открыт для новых вызовов и интересных проектов!</p>
             
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <label for="name">Имя:</label>
-                    <input type="text" id="name" placeholder="Введите ваше имя">
+                    <label for="name"><i class="fas fa-user"></i> Ваше имя:</label>
+                    <input type="text" id="name" placeholder="Как к вам обращаться?">
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="Введите ваш email">
+                    <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                    <input type="email" id="email" placeholder="Ваш электронный адрес">
                 </div>
                 
                 <div class="form-group">
-                    <label for="message">Сообщение:</label>
-                    <textarea id="message" rows="5" placeholder="Введите ваше сообщение"></textarea>
+                    <label for="message"><i class="fas fa-comment"></i> Сообщение:</label>
+                    <textarea id="message" rows="6" placeholder="Расскажите о вашем проекте или идее..."></textarea>
                 </div>
                 
-                <button type="button" class="submit-btn" onclick="submitForm()">Отправить</button>
+                <button type="button" class="submit-btn" onclick="submitForm()">
+                    <i class="fas fa-paper-plane"></i> Отправить сообщение
+                </button>
             </form>
             
             <div class="contact-info">
-                <h3>Наши контакты:</h3>
-                <p><i class="fas fa-envelope"></i> email@example.com</p>
-                <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                <h3><i class="fas fa-address-card"></i> Контакты Artiv:</h3>
+                <p><i class="fas fa-at"></i> <strong>Email:</strong> artiv@example.com</p>
+                <p><i class="fas fa-hashtag"></i> <strong>GitHub:</strong> github.com/artiv</p>
+                <p><i class="fas fa-code"></i> <strong>Проекты:</strong> artivlabs.io</p>
             </div>
         </section>
         {% endif %}
@@ -108,7 +150,7 @@
                         <i class="fas fa-crown"></i>
                     </div>
                 </div>
-                <p class="factor-subtitle">Специальная страница для легендарного друга!</p>
+                <p class="factor-subtitle">Специальная зона, созданная artiv для легендарного друга Factor!</p>
                 
                 <div class="factor-stats">
                     <div class="stat-card">
@@ -140,7 +182,7 @@
                             </div>
                             <div class="button-pulse"></div>
                         </button>
-                        <p class="button-hint">Нажми на кнопку, чтобы получить комплимент!</p>
+                        <p class="button-hint">Нажми на кнопку или пробел, чтобы получить комплимент от artiv!</p>
                     </div>
 
                     <div class="compliments-display" id="complimentsDisplay">
@@ -155,21 +197,21 @@
                             <i class="fas fa-fire"></i> Огненный комплимент
                         </button>
                         <button class="special-button" onclick="generateSpecialCompliment('gold')">
-                            <i class="fas fa-coins"></i> Золотой комплимент
+                            <i class="fas fa-crown"></i> Золотой комплимент
                         </button>
                     </div>
                 </div>
 
                 <div class="factor-sidebar">
                     <div class="recent-compliments">
-                        <h3><i class="fas fa-history"></i> Последние комплименты:</h3>
+                        <h3><i class="fas fa-history"></i> История комплиментов:</h3>
                         <ul id="recentCompliments">
                             <!-- Последние комплименты будут здесь -->
                         </ul>
                     </div>
                     
                     <div class="achievements">
-                        <h3><i class="fas fa-medal"></i> Достижения:</h3>
+                        <h3><i class="fas fa-medal"></i> Достижения Factor:</h3>
                         <div class="achievement-list" id="achievementList">
                             <!-- Достижения будут здесь -->
                         </div>
@@ -178,11 +220,15 @@
             </div>
 
             <div class="factor-message">
-                <h3><i class="fas fa-heart"></i> Для Factor:</h3>
+                <h3><i class="fas fa-heart"></i> Специальное послание для Factor:</h3>
                 <p class="special-message">
-                    Эта страница создана специально для тебя! Каждый раз, когда ты нажимаешь кнопку, 
-                    ты получаешь новый уникальный комплимент. Ты - потрясающий друг и заслуживаешь 
-                    только самых лучших слов! Продолжай сиять! ✨
+                    Привет, Factor! Эта страница создана специально для тебя с заботой и уважением. 
+                    Каждый клик по кнопке - это новая порция комплиментов от твоего друга artiv. 
+                    Ты - невероятный человек, и эта страница - лишь маленькое доказательство того, 
+                    насколько ты важен. Продолжай быть таким же удивительным!
+                </p>
+                <p class="artiv-signature">
+                    С наилучшими пожеланиями, <strong>artiv</strong> ✨
                 </p>
             </div>
         </section>
@@ -190,8 +236,15 @@
     </main>
 
     <footer class="footer">
-        <p>© 2024 Мой Flask Сайт. Все права защищены.</p>
-        <p>Создано с <i class="fas fa-heart"></i> и Flask</p>
+        <div class="creator-credit">
+            <i class="fas fa-code"></i>
+            Создано с ❤️ <strong>artiv</strong> для Factor и всех друзей
+        </div>
+        <p>© 2024 Artiv Labs. Все права защищены.</p>
+        <p>Flask, Python, HTML5, CSS3, JavaScript - магия в каждом байте</p>
+        <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 1rem;">
+            <i class="fas fa-lightbulb"></i> Проект создан в рамках креативной лаборатории Artiv Labs
+        </p>
     </footer>
 
     <div id="notification" class="notification"></div>

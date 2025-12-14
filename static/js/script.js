@@ -27,7 +27,7 @@ function showMessage() {
     showNotification(randomMessage);
 }
 
-// Обработка формы
+// Обработка формы (теперь просто показывает сообщение)
 function submitForm() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -38,7 +38,7 @@ function submitForm() {
         return;
     }
     
-    showNotification('Сообщение отправлено! Artiv свяжется с вами в ближайшее время.', 'success');
+    showNotification('Спасибо за сообщение! Форма работает в демо-режиме.', 'success');
     
     // Очистка формы
     document.getElementById('name').value = '';
@@ -82,14 +82,20 @@ function saveTheme(isDarkMode) {
 // Загрузка темы из localStorage
 function loadTheme() {
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    
+    // ПРЕДОТВРАЩАЕМ МИГАНИЕ: применяем тему ДО того как страница полностью отобразится
     if (isDarkMode) {
         document.body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        themeToggle.style.background = 'linear-gradient(45deg, #f39c12, #e74c3c)';
+        if (window.themeToggle) {
+            window.themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            window.themeToggle.style.background = 'linear-gradient(45deg, #f39c12, #e74c3c)';
+        }
     } else {
         document.body.classList.remove('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        themeToggle.style.background = 'linear-gradient(45deg, #6a11cb, #2575fc)';
+        if (window.themeToggle) {
+            window.themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            window.themeToggle.style.background = 'linear-gradient(45deg, #6a11cb, #2575fc)';
+        }
     }
 }
 
@@ -101,6 +107,9 @@ function createThemeToggle() {
     themeToggle.id = 'themeToggle';
     themeToggle.setAttribute('aria-label', 'Переключить тему');
     themeToggle.setAttribute('title', 'Переключить светлую/темную тему');
+    
+    // Сохраняем в глобальную переменную для быстрого доступа
+    window.themeToggle = themeToggle;
     
     themeToggle.addEventListener('click', function() {
         const isDarkMode = !document.body.classList.contains('dark-mode');
@@ -123,13 +132,24 @@ function createThemeToggle() {
     return themeToggle;
 }
 
+// Применяем тему СРАЗУ при загрузке страницы
+(function applyThemeImmediately() {
+    // Применяем тему как можно раньше
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+})();
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     // Добавляем кнопку переключения темы
     const themeToggle = createThemeToggle();
     document.body.appendChild(themeToggle);
     
-    // Загружаем сохраненную тему
+    // Загружаем сохраненную тему (обновляем иконку)
     loadTheme();
     
     // Анимация для карточек

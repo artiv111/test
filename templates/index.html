@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <style>
+        /* Предотвращаем мигание белым экраном */
+        body {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s;
+        }
+        
+        body.theme-loaded {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <!-- Бейдж создателя -->
@@ -108,8 +121,22 @@
 
         {% if page == 'contact' %}
         <section class="page-content">
-            <h1>Свяжитесь с нами</h1>
-            <p>Есть вопросы или идеи? Artiv всегда открыт для новых вызовов и интересных проектов!</p>
+            <h1>Контакты</h1>
+            <p>Хочешь узнать больше о проектах Artiv или просто поздороваться? Пиши!</p>
+            
+            <!-- УБРАЛ "Свяжитесь с нами" из описания -->
+            
+            <div class="contact-info">
+                <h3><i class="fas fa-address-card"></i> Контакты Artiv:</h3>
+                <p><i class="fas fa-at"></i> <strong>Email:</strong> artiv@example.com</p>
+                <p><i class="fas fa-hashtag"></i> <strong>GitHub:</strong> github.com/artiv</p>
+                <!-- УБРАЛ "Проекты: artivlabs.io" -->
+            </div>
+            
+            <div class="about-info">
+                <h3><i class="fas fa-comment"></i> Демо-форма:</h3>
+                <p>Эта форма работает в демонстрационном режиме. Заполни поля и нажми кнопку, чтобы увидеть анимацию отправки.</p>
+            </div>
             
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
@@ -124,20 +151,13 @@
                 
                 <div class="form-group">
                     <label for="message"><i class="fas fa-comment"></i> Сообщение:</label>
-                    <textarea id="message" rows="6" placeholder="Расскажите о вашем проекте или идее..."></textarea>
+                    <textarea id="message" rows="6" placeholder="Напиши что-нибудь..."></textarea>
                 </div>
                 
                 <button type="button" class="submit-btn" onclick="submitForm()">
-                    <i class="fas fa-paper-plane"></i> Отправить сообщение
+                    <i class="fas fa-paper-plane"></i> Отправить демо-сообщение
                 </button>
             </form>
-            
-            <div class="contact-info">
-                <h3><i class="fas fa-address-card"></i> Контакты Artiv:</h3>
-                <p><i class="fas fa-at"></i> <strong>Email:</strong> artiv02.2009@gmail.com</p>
-                <p><i class="fas fa-hashtag"></i> <strong>GitHub:</strong> github.com/artiv111</p>
-                <p><i class="fas fa-code"></i> <strong>Проекты:</strong> artivlabs.io</p>
-            </div>
         </section>
         {% endif %}
 
@@ -256,5 +276,14 @@
     {% if page == 'factor' %}
     <script src="{{ url_for('static', filename='js/factor.js') }}"></script>
     {% endif %}
+    
+    <script>
+        // Плавное появление страницы после применения темы
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.body.classList.add('theme-loaded');
+            }, 50);
+        });
+    </script>
 </body>
 </html>

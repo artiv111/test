@@ -1675,4 +1675,142 @@ body.dark-mode .factor-message {
     cursor: not-allowed;
     transform: none !important;
 }
+/* ====== ИСПРАВЛЕНИЕ МИГАНИЯ ТЕМЫ ====== */
+
+/* Предотвращаем мигание при переходе между страницами */
+body {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Улучшаем переходы для темной темы */
+body.dark-mode,
+body.dark-mode * {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Улучшаем переходы для всех элементов при смене темы */
+.navbar,
+.hero,
+.feature-card,
+.page-content,
+.about-info,
+.contact-info,
+.footer,
+.factor-hero,
+.factor-button,
+.compliments-display,
+.recent-compliments,
+.achievements,
+.factor-message {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ====== УЛУЧШЕНИЯ ДЛЯ КНОПКИ THEME TOGGLE ====== */
+.theme-toggle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ====== УЛУЧШЕНИЯ ДЛЯ ФОРМЫ КОНТАКТОВ ====== */
+.contact-form {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    border: 2px solid rgba(106, 17, 203, 0.1);
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+    transition: all 0.3s ease;
+}
+
+.contact-form .form-group input:focus,
+.contact-form .form-group textarea:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
+}
+
+/* ====== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ====== */
+
+/* Улучшение отображения уведомлений */
+.notification {
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), 
+                opacity 0.3s ease;
+    will-change: transform, opacity;
+}
+
+/* Плавное появление элементов при загрузке */
+.feature-card,
+.page-content,
+.factor-button,
+.special-button {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Улучшение для кнопки Factor */
+.factor-button {
+    will-change: transform, box-shadow;
+}
+
+/* Плавное исчезновение комплиментов */
+.compliment {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Улучшение для бейджа создателя */
+.creator-badge {
+    animation: floatBadge 3s ease-in-out infinite, 
+               fadeIn 0.5s ease-out;
+    will-change: transform;
+}
+
+/* ====== ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ====== */
+@media (max-width: 768px) {
+    /* Улучшаем переходы на мобильных */
+    body,
+    body * {
+        transition-duration: 0.25s !important;
+    }
+    
+    /* Плавное появление меню на мобильных */
+    .nav-menu {
+        transition: all 0.3s ease;
+    }
+    
+    /* Улучшаем анимации для мобильных */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
 }
